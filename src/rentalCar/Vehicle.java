@@ -1,5 +1,7 @@
 package rentalCar;
 
+import java.util.Objects;
+
 abstract class Vehicle {
     private final String licensePlate;
     private final String brand;
@@ -37,5 +39,17 @@ abstract class Vehicle {
     public String getDetails() {
         return String.format("%s %s (%s) - $%.2f/day - %s",
                 licensePlate, brand, getVehicleType(), dailyRate, status.getDescription());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Vehicle vehicle = (Vehicle) o;
+        return Objects.equals(licensePlate, vehicle.licensePlate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(licensePlate);
     }
 }
